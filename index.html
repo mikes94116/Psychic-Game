@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Psychic Game</title>
+</head>
+
+<body>
+
+    <div id="display">
+    <h1>Psychic Game</h1>
+
+    <p>Guess what letter I'm thinking of?...</p>
+
+    <p>Wins: </p>
+
+    <p>Losses: </p>
+
+    <p>Guesses left: </p>
+    </div>
+
+    <p>Guesses so far: <span id="keyboardGuess"></span></p>
+    
+
+</body>
+
+<script>
+
+    var winCount = 0;
+    var losses = 0;
+    var guessesLeft = 10;
+    
+
+    document.onkeyup = function (event) {
+
+        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        document.getElementById("keyboardGuess").innerHTML += userGuess + ", ";
+
+        //Q. why the +97 thing?... would like to understand this?...
+        var compGuess = String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+            
+
+            if (userGuess !== compGuess) {
+
+                guessesLeft--;
+
+            }
+            
+            else {
+
+                winCount++;
+                guessesLeft = 10;
+                document.getElementById("keyboardGuess").innerHTML = "";
+
+            }
+            
+            if (guessesLeft === 0) {
+                
+                losses++;
+                guessesLeft = 10;
+                document.getElementById("keyboardGuess").innerHTML = "";
+
+            }
+
+           
+
+            
+
+        var html = "<h1>Psychic Game</h1>" + 
+        "<p>Guess what letter I'm thinking of?...</p>" +
+        "<p>Wins: " + 
+        winCount + 
+        "</p>" +
+        "<p>Losses: " + 
+        losses + 
+        "</p>" +
+        "<p>Guesses left: " + 
+        guessesLeft + 
+        "</p>"
+        
+        document.querySelector('#display').innerHTML = html;
+
+        }
+
+
+</script>
+
+</html>
